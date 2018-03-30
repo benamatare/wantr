@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>wantr</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" /> -->
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+
+    <link rel="stylesheet" href="odometer-theme-train.css" />
+    <script src="odometer.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div id="top-bar" class="ui inverted top fixed menu">
+      <div class="running">
+        <img id="running-man" src="images/running2.gif">
+      </div>
+    </div>
+
+    <!--nav bar  -->
+    <div id="user-container" class="ui inverted left fixed vertical menu">
+      <div class="item">
+        <h1 id="logo-text">   W A N T R  </h1>
+      </div>
+      <a id="user-name" class="item"></a>
+      <a id="nav-stat-link" class="item">Stats</a>
+      <a id="nav-goal-link" class="item">Goals</a>
+      <div id="nav-analytics-link" class="ui dropdown item">
+        Analytics
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="header">Charts</div>
+          <a id="show-donut-chart"class="item">Categories</a>
+          <a id="show-line-chart" class="item">Monthly Goals</a>
+        </div>
+      </div>
+      <a id="nav-create-link"class="item">New Goal</a>
+      <a id="nav-step-link" class="item">New Step</a>
+    </div>
+
+
+
+
+  <div class="container">
+    <!-- chart container -->
+      <div id="my-chart" class="container">
+        <div class="ui one column grid">
+          <div class="column">
+            <div id="chart-card"class="ui card">
+              <div id="chart-content" class="content">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="stat-dad" class="container">
+      <!-- stat card -->
+      <div id="stat-container" class="ui card">
+        <div id="stat-content" class="content">
+          <div id='stat-content-div' class="ui horizontal statistics">
+            <h2 class="ui centered dividing header">Stats</h2>
+            <div class="statistic">
+            </div>
+            <div class="statistic">
+            </div>
+            <div class="statistic">
+            </div>
+            <div class="statistic">
+              <div id="total-step-stat" class="odometer"></div><div class="label">Total Steps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div id="user-dashboard" class="ui three column grid">
+          <!-- goal card -->
+        <div class="left floated column">
+          <div id="goal-container" class="ui green card">
+            <div class="content">
+              <h2 class="ui centered dividing header">Goals</h2>
+            </div>
+            <div id="goal-content" class="content">
+            </div>
+          </div>
+        </div>
+        <!-- goal-detail card -->
+        <div class="column">
+          <div id="goal-detail" class="ui green card" style="display:none">
+          </div>
+        </div>
+        <div class="right floated center aligned column">
+          <!-- motivational gif container -->
+          <!-- <div  class="ui green card"> -->
+            <div id="motivational-gif" class="content">
+              <img src="images/you_can_do_it.gif" style="width:90%">
+            </div>
+          <!-- </div> -->
+          <!-- NEED SOMETHING HERE -->
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Create new goal modal -->
+    <div id="create-goal" class="ui small modal">
+      <i class="close icon"></i>
+      <div class="image content">
+        <div class="ui small image">
+          <img src="images/power_rangers_gif.gif">
+        </div>
+        <div class="description">
+          <div class="ui header">Create a new goal for yourself</div>
+
+          <form id="create-goal-form" class="ui form">
+            <input type="text" name="" placeholder="I want to...">
+          </form>
+          <div class="ui sub header">Category</div>
+            <select id="goal-dropdown" class="ui fluid search dropdown" name="category">
+                <option value="">  </option>
+              <option value="Entertainment"> Entertainment </option>
+              <option value="Finance"> Finance </option>
+              <option value="Fitness"> Fitness </option>
+              <option value="Lifestyle"> Lifestyle </option>
+              <option value="Travel"> Travel </option>
+              <option value="Education"> Education </option>
+            </select>
+            <div class="ui sub header">Complete By</div>
+            <div class="ui calendar" id="modal-cal-picker">
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input id="goal-calendar" type="text" placeholder="Date">
+              </div>
+            </div>
+            <script type="text/javascript">
+              $('#modal-cal-picker').calendar({
+                type: 'date'
+              });
+            </script>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui black deny button">
+          Go Back
+        </div>
+        <div id="create-goal-button" class="ui positive right labeled icon button">
+          Add New Goal
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create new Step modal -->
+    <div id="create-step-modal" class="ui small modal">
+      <i class="close icon"></i>
+      <div class="image content">
+        <div class="ui small image">
+          <img src="images/power_rangers_gif.gif">
+        </div>
+        <div class="description">
+          <div class="ui header">Create a new step for your goal</div>
+          <form id="create-step-form"class="ui form">
+            <input type="text" placeholder="For my goal...">
+          </form>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui black deny button">
+          Go Back
+        </div>
+        <div id="create-step-button" class="ui positive right labeled icon button">
+          Add New Step
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- scripting local js files -->
+    <script src="index.js"></script>
+    <script src="goal.js"></script>
+    <script src="user.js"></script>
+    <script src="step.js"></script>
+    <script src="chart.js"></script>
+    <script src="landing.js"></script>
+  </body>
+</html>
