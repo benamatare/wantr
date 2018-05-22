@@ -1,7 +1,7 @@
 # README
 
 Wantr - A lifestyle activity dashboard in which users could establish & track goals with steps to complete.
-Created by Ben Matare & Jairo Espinosa 
+Created by Ben Matare & Arren Alexander
 ____________
 Demo -> https://www.youtube.com/watch?v=eo3DKU-xdFc</br>
 ____________
